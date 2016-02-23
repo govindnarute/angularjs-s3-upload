@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+</head>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/toastr/toastr.min.css">
+<script src="js/vendor/angular/angular.js"></script>
+<script src="js/app.js"></script>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="js/directives/fileDirective.js"></script>
+<script src="js/vendor/aws/aws-sdk.js"></script>
+<script src="js/vendor/toastr/toastr.min.js"></script>
+<script src="js/controller/uploadController.js"></script>
+<!-- apply our angular app to our site -->
+<body ng-controller="uploadController">
+	<h1>hello {{test}}</h1>
+	<input type="file" name="file" file></input>
+	<div class="progress">
+		<div class="progress-bar" role="progressbar"
+			aria-valuenow="{{ uploadProgress }}" aria-valuemin="0"
+			aria-valuemax="100" style="width:{{uploadProgress}}%;">{{uploadProgress}}%</div>
+	</div>
+	<a class="btn btn-primary btn-block btn-lg" ng-click="upload()">Upload</a>
+<img src="{{image}}" width="200px" height="200px">
+	<!-- MAIN CONTENT -->
+	<div>
+		<div ui-view></div>
+	</div>
+
+</body>
+</html>
