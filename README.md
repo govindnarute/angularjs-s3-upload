@@ -20,3 +20,4 @@ Set this CORSConfiguration on s3 Bucket
     </CORSRule>
 </CORSConfiguration>
 
+
