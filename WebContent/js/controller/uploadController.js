@@ -7,12 +7,14 @@ myApp
 					$scope.sizeLimit = 10585760; // 10MB in Bytes
 					 $scope.uploadProgress = 0;
 					$scope.imageType=['gif','png','jpg','jpeg'];
+					
+					$scope.fileName="media/RXMP8J2l-Govind.jpg";
 					$scope.upload = function() {
 
 						AWS.config
 								.update({
-									accessKeyId : "XXXXXXXXXXXXXXXXXXXXXXXX",
-									secretAccessKey : "XXXXXXXXXXXXXXXXXXXXXXXX"
+									accessKeyId : "XXXXXXXXXXXXXXXXX",
+									secretAccessKey : "XXXXXXXXXXXXXXXXXXX"
 								});
 						AWS.config.region = 'us-east-1';
 						var bucket = new AWS.S3({
@@ -20,6 +22,7 @@ myApp
 								Bucket : "govindmediastore"
 							}
 						});
+						
 						var fileExtension=$scope.file.name;
 						fileExtension=fileExtension.split('.').pop().toLowerCase();
 						console.log(fileExtension)
@@ -111,4 +114,39 @@ myApp
 						}
 						return text;
 					}
+					
+					
+					$scope.deleteMedia=function(){
+				
+						var params = {
+								Key : $scope.fileName
+								
+							};
+						
+						bucket
+						.deleteObject(params, function(err, data) {
+							if (err) {
+								toastr.error(err.message,err.code);
+								return false;
+							} else {
+								 toastr.success('File Delete Successfully', 'Done');
+								 $scope.image=$scope.imageUrl+uniqueFileName;		
+								setTimeout(function() {
+									$scope.uploadProgress = 0;
+									$scope.$digest();
+								}, 4000);
+							}
+						})
+						.on(
+								'httpUploadProgress',
+								function(progress) {
+									$scope.uploadProgress = Math
+											.round(progress.loaded
+													/ progress.total
+													* 100);
+									$scope.$digest();
+								});
+				
+					}
+					
 				});
